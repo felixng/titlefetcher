@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'queries/index'
   get 'queries/create' => 'queries#index'
+  get 'query' => 'queries#fetch'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

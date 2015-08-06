@@ -8,14 +8,14 @@ class QueriesController < ApplicationController
   def create 
   	@query = Query.new(query_params)
   	if @query.save 
-        redirect_to '/' 
+        redirect_to @query.url
       else 
         render 'new' 
      end 
   end
 
-  def fetch(url)
-  	
+  def fetch
+  	redirect_to 
   end
 
   def query_params 
