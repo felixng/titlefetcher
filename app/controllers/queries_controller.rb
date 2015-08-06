@@ -13,11 +13,7 @@ class QueriesController < ApplicationController
         render 'new' 
      end 
   end
-
-  def fetch
-  	redirect_to 
-  end
-
+  
   def query_params 
     params.require(:query).permit(:url) 
   end
