@@ -1,2 +1,12 @@
-<h1>Wordpress#fetch</h1>
-<p>Find me in app/views/wordpress/fetch.html.erb</p>
+<header class="header">
+	<h1>Post Title Fetcher
+		<span>Get all public posts title from a wordpress blog.</span>
+	</h1>
+</header>
+<section class="content">
+	<%= 
+	@titles.each do |title|
+		title.text
+	end
+	%>
+</section>
