@@ -24,6 +24,15 @@ class QueriesController < ApplicationController
 	 	end 
 	end
 	
+	def fetch
+	  @posts = Query.order(:created_at)
+	  
+	  respond_to do |format|
+	    format.html
+	    format.csv { send_data @posts.as_csv }
+	  end
+	end
+
 	def query_params 
 		params.require(:query).permit(:url) 
 	end
