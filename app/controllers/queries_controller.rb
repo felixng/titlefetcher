@@ -5,14 +5,22 @@ require 'cgi'
 	
 class QueriesController < ApplicationController
 	def index
-		@query = Query.new
+		@query = Query.new()
 	end
 
 	def fetch_titles(url)
 	    doc = Nokogiri::HTML(open(url))
-	    @titles = doc.css('h2').map
-		#@titles = result.scan(/<h2>([^<>]*)<\/h2>/imu).flatten.select{|x| !x.empty?}
-		render 'fetch'
+	    titles = doc.css('h2').map
+
+	    titles.each do |title|
+	    	post = Post.new(title: title.text)
+	    	post.save
+	    end
+
+		posts = Post.order(:created_at)
+	    send_data posts.as_csv
+
+	    #render 'fetch'
 	end
 
 	def create 
@@ -23,9 +31,9 @@ class QueriesController < ApplicationController
 	    	render 'new' 
 	 	end 
 	end
-	
+
 	def fetch
-	  @posts = Query.order(:created_at)
+	  @posts = Post.order(:created_at)
 	  
 	  respond_to do |format|
 	    format.html
@@ -37,7 +45,6 @@ class QueriesController < ApplicationController
 		params.require(:query).permit(:url) 
 	end
 	 
-	private
 	def get_post_details(doc)
 	  #an array of hashes with each posts title, url, date, author
 	  posts = []

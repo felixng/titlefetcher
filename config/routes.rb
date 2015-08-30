@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'queries/index'
-  get 'queries/create' => 'queries#index'
+  
   get 'query' => 'queries#fetch'
   get 'query/fetch' => 'queries#fetch'
   # The priority is based upon order of creation: first created -> highest priority.
@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
-     resources :queries
+  resources :queries
+  post '/queries/create' => 'queries#index'
+  get '/queries/create' => 'queries#index'
      
   # Example resource route with options:
   #   resources :products do
